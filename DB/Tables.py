@@ -2,7 +2,7 @@ import config
 
 import sqlalchemy
 from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, BigInteger, Float
 from sqlalchemy.orm import sessionmaker, relationship
 
 
@@ -15,7 +15,7 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'user'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(BigInteger, primary_key=True)
     name = Column(String)
     goods = relationship("Goods", back_populates="user")
 
@@ -27,7 +27,9 @@ class Goods(Base):
     __tablename__ = 'goods'
     id = Column(Integer, primary_key=True)
     link = Column(String)
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(BigInteger, ForeignKey('user.id'))
     user = relationship("User", back_populates="goods")
+    price = Column(Float, nullable=False)
 
 Base.metadata.create_all(engine)
+# Base.metadata.drop_all(bind=engine, tables=[User.__table__, Goods.__table__] )

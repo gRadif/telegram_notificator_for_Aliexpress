@@ -52,7 +52,10 @@ def add_goods(message):
         text_message = message.html_text.split()
         link_goods = text_message[2] ### [2] <--  element always must have link goods
 
-        query_add = Goods(link=link_goods, user_id = id_user)
+        price_goods = Ali(link_goods).get_info()
+        price_goods = price_goods['price_product']
+
+        query_add = Goods(link=link_goods, user_id = id_user, price=price_goods)
         session.add(query_add)
         session.commit()
 
@@ -69,7 +72,11 @@ def bot_login(message):
     check_bool = check_user_db(id_user)
     name_user = message.chat.first_name
 
-    if check_bool is False:
+    access = False
+    if access is False:
+        bot.send_message(message.chat.id, 'Разработчик закрыл возможность авторизации')
+
+    elif check_bool is False:
         reg_query = User(id = id_user, name=name_user)
         session.add(reg_query)
         session.commit()
