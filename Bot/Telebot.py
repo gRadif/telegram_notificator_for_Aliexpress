@@ -35,7 +35,7 @@ class Bot:
         }
         url = BASE_URL + 'sendMessage'
         response_2 = requests.post(url, params=params)
-        print(response_2.json())
+        # print(response_2.json())
 
 
 
