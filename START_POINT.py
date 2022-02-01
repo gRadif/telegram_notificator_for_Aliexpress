@@ -39,7 +39,7 @@ while True:
         # if in chat message None, return of the start cycle
         if message is None:
             continue
-        print(message)
+
         id_user = message[0]['message']['chat']['id']
 
         # check if sended gif or photo and video, them bot don't work
