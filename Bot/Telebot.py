@@ -18,7 +18,7 @@ class Bot:
         }
         response = requests.get(url, params=params)
         response = response.json()
-        print(response)
+
 
         if len(response['result']) >= 1:
             PARAMS_BOT['update_id'] = response['result'][0]['update_id'] + 1

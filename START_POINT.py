@@ -36,12 +36,18 @@ while True:
         time.sleep(1)
         message = bot.listen_chat()
 
-        # if in chat message None return of the start cycle
+        # if in chat message None, return of the start cycle
         if message is None:
             continue
-
+        print(message)
         id_user = message[0]['message']['chat']['id']
-        text_message = message[0]['message']['text']
+
+        # check if sended gif or photo and video, them bot don't work
+        try:
+            text_message = message[0]['message']['text']
+        except KeyError:
+            continue
+
         status_user = check_user_db(id_user)
         message_command = Commands.check_command(text_message)
 
