@@ -91,12 +91,14 @@ while True:
 
                 try:
                     price_goods = Ali(link_goods).get_info()
+                    print(price_goods)
                     price_goods = price_goods['price_product']
                     query_add = Goods(link=link_goods, user_id=id_user, price=price_goods)
                     session.add(query_add)
                     session.commit()
                     bot.send_message(f'{id_user}', 'Товар добавлен')
-                except:
+                except Exception as error:
+                    print(error)
                     bot.send_message(id_user, 'Не удалось добавить товар!')
 
             elif status_user == 'unauthenticated':
@@ -110,20 +112,39 @@ while True:
                 link = goods.link
                 price_goods = goods.price
                 id_goods = goods.id
+                try:
+                    data_dict = Ali(link).get_info()
+                    price_goods_in_ali = data_dict['price_product']
 
-                data_dict = Ali(link).get_info()
-                price_goods_in_ali = data_dict['price_product']
+                    if price_goods < price_goods_in_ali:
+                        update_price = session.query(Goods).filter_by(id=id_goods).update({'price': price_goods_in_ali})
+                        session.commit()
 
-                if price_goods != price_goods_in_ali:
-                    update_price = session.query(Goods).filter_by(id=id_goods).update({'price': price_goods_in_ali})
-                    session.commit()
+                        bot.send_message(id_user,
+                                         f'ЦЕНА УВЕЛИЧИЛОСЬ !!!\n'
+                                         f' БЫЛО = {price_goods}, СТАЛО = {price_goods_in_ali}\n'
+                                         f'id товара = {goods.id}\n'
+                                         f'{data_dict["url"]}\n')
 
-                    bot.send_message(id_user, f'ЦЕНА ИЗМЕНИЛАСЬ БЫЛО = {price_goods}, СТАЛО = {price_goods_in_ali}\n'
-                                              f'id товара = {goods.id}\n'
-                                              f'{data_dict["url"]}\n')
+                    elif price_goods > price_goods_in_ali:
+                        update_price = session.query(Goods).filter_by(id=id_goods).update({'price': price_goods_in_ali})
+                        session.commit()
 
-                else:
-                    bot.send_message(id_user, f'id товара = {goods.id}\n'
-                                                      f'цена товара = {price_goods_in_ali}\n'
-                                                      f'{data_dict["name_product"]}\n'
-                                                      f'{data_dict["url"]}\n')
+                        bot.send_message(id_user,
+                                         f'ЦЕНА УМЕНЬШИЛОСЬ !!!\n'
+                                         f'ОБРАТИ ВНИМАНИЕ\n'
+                                         f' БЫЛО = {price_goods}, СТАЛО = {price_goods_in_ali}\n'
+                                         f'id товара = {goods.id}\n'
+                                         f'{data_dict["url"]}\n')
+
+
+                    else:
+                        bot.send_message(id_user, f'id товара = {goods.id}\n'
+                                                  f'цена товара = {price_goods_in_ali}\n'
+                                                  f'{data_dict["name_product"]}\n'
+                                                  f'{data_dict["url"]}\n')
+                except:
+                    bot.send_message(id_user, f'С ОБЪЯВЛЕНИЕМ ЧТО ТО НЕ ТАК !!! ПРОВЕРЬТЕ ССЫЛКУ \n\n'
+                                              f'{link}\n')
+
+
