@@ -28,11 +28,12 @@ class Ali:
         }
 
         response = requests.get( self.url, headers=headers, params=params)
-        soup = BeautifulSoup(response.content, 'html.parser')
+        # print(response.content)
+        soup = BeautifulSoup(response.text, 'html.parser')
 
         # get product name
         name_product = soup.find('div', class_= 'Product_Name__container__hntp3').find_next().get_text()
-        # print(name_product)
+        print(name_product)
 
 
         # get price product

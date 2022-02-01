@@ -1,3 +1,5 @@
+import re
+
 from config import token
 import requests
 
@@ -19,7 +21,7 @@ class Bot:
 
         if len(response['result']) >= 1:
             PARAMS_BOT['update_id'] = response['result'][0]['update_id'] + 1
-            return response['result'][0]['message']['text']
+            return response['result']
 
         else:
             pass
@@ -33,8 +35,6 @@ class Bot:
         url = BASE_URL + 'sendMessage'
         response_2 = requests.post(url, params=params)
         print(response_2.json())
-
-
 
 
 
