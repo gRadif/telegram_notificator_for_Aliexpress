@@ -43,7 +43,7 @@ while True:
         id_user = message[0]['message']['chat']['id']
         text_message = message[0]['message']['text']
         status_user = check_user_db(id_user)
-        message_command = commands.check_command(text_message)
+        message_command = Commands.check_command(text_message)
 
         if message_command == '/start':
             bot.send_message(f'{id_user}', 'Приветствую Вас!\n'
