@@ -12,22 +12,22 @@ bot = Bot()
 
 
 while True:
-    goods_all_data = get_goods_all_data_all_users()
-    for goods in goods_all_data:
-        id_user = goods['user_id']
-        id_goods_in_db = goods['id']
-        data_goods_in_ali = Ali(goods['link']).get_info()
-        url_goods = data_goods_in_ali['url']
-        price_in_ali = data_goods_in_ali['price_product']
-        price_in_db = goods['price']
-
-        if price_in_ali != price_in_db:
-            update_price = session.query(Goods).filter_by(id=id_goods_in_db).update({'price': price_in_ali})
-            session.commit()
-
-            bot.send_message(id_user, f'ЦЕНА ИЗМЕНИЛАСЬ БЫЛО = {price_in_db}, СТАЛО = {price_in_ali}\n'
-                                      f'id товара = {id_goods_in_db}\n'
-                                      f'{url_goods}\n')
+    # goods_all_data = get_goods_all_data_all_users()
+    # for goods in goods_all_data:
+    #     id_user = goods['user_id']
+    #     id_goods_in_db = goods['id']
+    #     data_goods_in_ali = Ali(goods['link']).get_info()
+    #     url_goods = data_goods_in_ali['url']
+    #     price_in_ali = data_goods_in_ali['price_product']
+    #     price_in_db = goods['price']
+    #
+    #     if price_in_ali != price_in_db:
+    #         update_price = session.query(Goods).filter_by(id=id_goods_in_db).update({'price': price_in_ali})
+    #         session.commit()
+    #
+    #         bot.send_message(id_user, f'ЦЕНА ИЗМЕНИЛАСЬ БЫЛО = {price_in_db}, СТАЛО = {price_in_ali}\n'
+    #                                   f'id товара = {id_goods_in_db}\n'
+    #                                   f'{url_goods}\n')
 
 
     # range(600) is counter time in sec
