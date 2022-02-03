@@ -1,7 +1,7 @@
 import os
 
 
-access_authentication = True
+access_authentication = os.getenv("ACCESS", 'False')
 
 if DEBUG is True:
     try:
