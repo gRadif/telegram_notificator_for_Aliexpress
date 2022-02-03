@@ -9,7 +9,7 @@ from sqlalchemy.orm import sessionmaker, relationship
 # db = f'postgresql://{config.DB_USER}:{config.DB_PASS}@{config.DB_HOST}:{config.DB_PORT}/{config.DB_NAME}'
 db = 'sqlite:///C:\\Users\\shok\\Desktop\\python manage folder\\python_projects\\telegram_bot_ALIEXPRESS\\database.db'
 engine = sqlalchemy.create_engine(db, echo=True)
-Session = sessionmaker(bind=engine )
+Session = sessionmaker(bind=engine)
 session = Session()
 Base = declarative_base()
 
