@@ -32,6 +32,7 @@ class Bot:
         params = {
             'text': text,
             'chat_id': chat_id,
+            'parse_mode':'html'
         }
         url = BASE_URL + 'sendMessage'
         response_2 = requests.post(url, params=params)
