@@ -5,7 +5,6 @@ from MAIN_HANDLER import DollarNotification, \
     Data
 
 
-
 Data.is_auth_users_list = Handler().is_auth_users()
 
 while True:
