@@ -8,7 +8,7 @@ import os
 
 
 # db = f'postgresql://{config.DB_USER}:{config.DB_PASS}@{config.DB_HOST}:{config.DB_PORT}/{config.DB_NAME}'
-db = f'sqlite:///{os.getcwd()}\DB\database.db'
+db = f'sqlite:///{os.getcwd()}/DB/database.db'
 engine = sqlalchemy.create_engine(db, echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
