@@ -26,6 +26,7 @@ class AkBarsBank:
 
         soup = BeautifulSoup(response, "html.parser")
 
+
         try:
             dollar_price = soup.find("span", class_="DFlfde SwHCTb").get_text()
             dollar_price = dollar_price.replace(',', '.')

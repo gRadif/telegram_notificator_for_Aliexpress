@@ -12,7 +12,7 @@ class Data:
 
 
 class DollarNotification:
-    def control_dollar(self):
+    def control_dollar(self, id_user: int):
         dollar_cost = AkBarsBank().dollar_price()
 
         if type(dollar_cost) is str:

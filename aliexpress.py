@@ -32,8 +32,11 @@ class Ali:
         soup = BeautifulSoup(response.text, 'html.parser')
 
         # get product name
-        name_product = soup.find('div', class_= 'Product_Name__container__hntp3').find_next().get_text()
-        print(name_product)
+        try:
+            name_product = soup.find('div', class_= 'Product_Name__container__hntp3').find_next().get_text()
+            print(name_product)
+        except:
+            name_product = 'name product is not found!!!'
 
 
         # get price product

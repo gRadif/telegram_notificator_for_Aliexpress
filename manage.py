@@ -4,12 +4,13 @@ from MAIN_HANDLER import DollarNotification, \
     Commands, \
     Data
 
+import config
 
 Data.is_auth_users_list = Handler().is_auth_users()
 
 while True:
 
-    DollarNotification().control_dollar()
+    DollarNotification().control_dollar(id_user=config.id_dev)
 
     AliexpressNotification().control_aliexpress()
 
