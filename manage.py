@@ -3,12 +3,14 @@ from MAIN_HANDLER import DollarNotification, \
     Handler, \
     Commands, \
     Job_handler, AliexpressNotification, Ip
+from config import id_dev
 
 while True:
 
     # Job_handler().get_netology_jobs()
 
     #AliexpressNotification().control_aliexpress()
+    Ip().get_ip(id_dev)
 
 
     # range(600) is counter time in sec
