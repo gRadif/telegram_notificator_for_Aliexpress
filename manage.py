@@ -1,22 +1,18 @@
+import config
 from MAIN_HANDLER import DollarNotification, \
-    AliexpressNotification, \
     Handler, \
     Commands, \
-    Data
-
-import config
-
-Data.is_auth_users_list = Handler().is_auth_users()
+    Job_handler, AliexpressNotification
 
 while True:
 
-    DollarNotification().control_dollar(id_user=config.id_dev)
+    # Job_handler().get_netology_jobs()
 
     AliexpressNotification().control_aliexpress()
 
 
     # range(600) is counter time in sec
-    for i in range(600):
+    for i in range(5):
         status_chat_dict = Handler().chat_listen()
 
         if status_chat_dict['message'] is None:

@@ -6,13 +6,13 @@ from sqlalchemy import Column, Integer, String, ForeignKey, BigInteger, Float
 from sqlalchemy.orm import sessionmaker, relationship
 import os
 
-
 # db = f'postgresql://{config.DB_USER}:{config.DB_PASS}@{config.DB_HOST}:{config.DB_PORT}/{config.DB_NAME}'
 db = f'sqlite:///{os.getcwd()}/DB/database.db'
 engine = sqlalchemy.create_engine(db, echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
 Base = declarative_base()
+
 
 class User(Base):
     __tablename__ = 'user'
@@ -22,8 +22,10 @@ class User(Base):
     goods = relationship("Goods", back_populates="user")
 
     print('good')
+
     def __repr__(self):
         return "<User(name='%s')>" % (self.name)
+
 
 class Goods(Base):
     __tablename__ = 'goods'
@@ -33,5 +35,12 @@ class Goods(Base):
     user = relationship("User", back_populates="goods")
     price = Column(Float, nullable=False)
 
+
+class Jobs(Base):
+    __tablename__ = 'job'
+    id = Column(Integer, primary_key=True)
+    url = Column(String, unique=True)
+
+
 Base.metadata.create_all(engine)
-# Base.metadata.drop_all(bind=engine, tables=[User.__table__, Goods.__table__] )
+# Base.metadata.drop_all(bind=engine, tables=[Jobs.__table__])

@@ -1,11 +1,9 @@
-import re
-
 from config import token
 import requests
 
 
 PARAMS_BOT = {'update_id': 0}
-BASE_URL =f'https://api.telegram.org/bot{token}/'
+BASE_URL = f'https://api.telegram.org/bot{token}/'
 
 class Bot:
 
@@ -27,7 +25,7 @@ class Bot:
         else:
             pass
 
-    def send_message(self, chat_id, text ):
+    def send_message(self, chat_id, text):
 
         params = {
             'text': text,
