@@ -1,3 +1,6 @@
+import requests
+from bs4 import BeautifulSoup
+
 from DB.Tables import User, Goods, Jobs, session
 from Bot.Telebot import Bot
 from BANK import AkBarsBank
@@ -114,7 +117,8 @@ class Handler:
                         '[дД]обавь товар': 'добавь товар',
                         '[пП]окажи все': 'покажи все',
                         '[уУ]далить товар': 'удалить товар',
-                        '[дД]оллар': 'доллар'}
+                        '[дД]оллар': 'доллар',
+                        '[ip]': 'ip'}
 
         for command, value in command_dict.items():
             pattern = f'{command}'
@@ -282,4 +286,10 @@ class Job_handler:
             #                            f'jobs in netology, response error ')
 
 
-Job_handler().get_netology_jobs()
+class Ip:
+    def get_ip(self, id_user: int):
+        url_ip = 'https://2ip.ru'
+        response = requests.get(url_ip)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        ip = soup.find('div', class_='ip').text
+        Bot().send_message(id_user, f'{ip}')

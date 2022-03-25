@@ -2,13 +2,13 @@ import config
 from MAIN_HANDLER import DollarNotification, \
     Handler, \
     Commands, \
-    Job_handler, AliexpressNotification
+    Job_handler, AliexpressNotification, Ip
 
 while True:
 
     # Job_handler().get_netology_jobs()
 
-    AliexpressNotification().control_aliexpress()
+    #AliexpressNotification().control_aliexpress()
 
 
     # range(600) is counter time in sec
@@ -41,5 +41,9 @@ while True:
 
         elif command == 'доллар':
             DollarNotification().current_dollar_cost(id_user=id_user)
+
+        elif command == 'ip':
+            Ip().get_ip(id_user)
+
 
 
