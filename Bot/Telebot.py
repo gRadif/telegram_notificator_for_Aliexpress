@@ -14,7 +14,7 @@ class Bot:
         params = {
             'offset': f'{update_id}'
         }
-        response = requests.get(url, params=params)
+        response = requests.get(url, params=params, timeout=60)
         response = response.json()
 
 

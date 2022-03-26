@@ -118,7 +118,7 @@ class Handler:
                         '[пП]окажи все': 'покажи все',
                         '[уУ]далить товар': 'удалить товар',
                         '[дД]оллар': 'доллар',
-                        '[ip]': 'ip'}
+                        '[iIp]': 'ip'}
 
         for command, value in command_dict.items():
             pattern = f'{command}'
